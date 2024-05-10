@@ -1,5 +1,10 @@
 package jm.task.core.jdbc.util;
 
+
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
@@ -27,4 +32,20 @@ public class Util {
         return connection;
     }
 
-}
+
+    public static SessionFactory getSessionFactory() {
+        Configuration configuration = new Configuration();
+        configuration.setProperty("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
+        configuration.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/db");
+        configuration.setProperty("hibernate.connection.username", "root");
+        configuration.setProperty("hibernate.connection.password", "root");
+        configuration.setProperty("hibernate.current_session_context_class", "thread");
+        configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+        configuration.addAnnotatedClass(jm.task.core.jdbc.model.User.class);
+        // Другие настройки Hibernate...
+
+        return configuration.buildSessionFactory();
+        }
+    }
+
+
