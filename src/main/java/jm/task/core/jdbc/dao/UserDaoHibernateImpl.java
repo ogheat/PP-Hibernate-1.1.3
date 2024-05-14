@@ -30,9 +30,7 @@ public class UserDaoHibernateImpl implements UserDao {
             query.executeUpdate();
             tx.commit();
         } catch (HibernateException e) {
-            if (tx != null && tx.isActive()) {
-                tx.rollback();
-            }
+
         }
     }
 
@@ -45,9 +43,7 @@ public class UserDaoHibernateImpl implements UserDao {
             query.executeUpdate();
             tx.commit();
         } catch (HibernateException e) {
-            if (tx != null && tx.isActive()) {
-                tx.rollback();
-            }
+
         }
     }
 
